@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Supermercado{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- aquí puedes incluir CSS/Bootstrap -->
+</head>
+<body>
+  <header>
+    <h1><a href="{% url 'productos:lista' %}">Mi Supermercado</a></h1>
+    <nav>
+      <a href="{% url 'productos:lista' %}">Productos</a> |
+      <a href="{% url 'productos:crear' %}">Nuevo Producto</a>
+    </nav>
+    <hr>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <hr>
+    <small>© {{ now.year }} Mi Supermercado</small>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!-- productos/templates/productos/lista.html -->
+{% extends "core/base.html" %}
+
+{% block title %}Lista de productos{% endblock %}
+
+{% block content %}
+<h2>Productos</h2>
+
+<ul>
+  {% for producto in productos %}
+    <li>
+      <a href="{% url 'productos:detalle' producto.pk %}">{{ producto.nombre }}</a>
+      - {{ producto.categoria.nombre }} -
+      ${{ producto.precio }} -
+      Stock: {{ producto.stock }}
+      <a href="{% url 'productos:editar' producto.pk %}">Editar</a>
+      |
+      <a href="{% url 'productos:eliminar' producto.pk %}">Eliminar</a>
+    </li>
+  {% empty %}
+    <li>No hay productos.</li>
+  {% endfor %}
+</ul>
+
+{% if is_paginated %}
+  <div class="pagination">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">« anterior</a>
+    {% endif %}
+    <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">siguiente »</a>
+    {% endif %}
+  </div>
+{% endif %}
+{% endblock %}
